@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ride_lanka/screens/auth/login_screen.dart';
-import 'package:ride_lanka/screens/splash/land_screen.dart';
-import 'package:ride_lanka/screens/splash/splash_screen.dart';
+import 'package:ride_lanka/features/auth/screens/login_screen.dart';
+import 'package:ride_lanka/features/splash/screens/land_screen.dart';
+import 'package:ride_lanka/features/splash/screens/splash_screen.dart';
 
 class AppRoutes {
   const AppRoutes._();
