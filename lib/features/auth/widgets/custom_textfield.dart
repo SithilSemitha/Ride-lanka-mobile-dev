@@ -6,11 +6,13 @@ class CustomTextfield extends StatefulWidget {
   final String labelText;
   final bool isPassword;
   final bool isRegister;
+  final TextEditingController? controller;
   const CustomTextfield({
     super.key,
     required this.labelText,
     this.isPassword = false,
     this.isRegister = true,
+    this.controller,
   });
 
   @override
@@ -35,8 +37,10 @@ class _CustomTextfieldState extends State<CustomTextfield> {
         ),
         const SizedBox(height: 8),
         TextField(
+          controller: widget.controller,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
           obscureText: widget.isPassword && _isObscure,
+
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,

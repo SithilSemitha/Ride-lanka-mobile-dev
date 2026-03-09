@@ -12,4 +12,6 @@ class AppColors {
   static const Color grey = Colors.grey;
   static const Color forgotPasswordText = Color(0xFF4D81E7);
   static const Color errorBorder = Color(0xFFFF4D4D);
+  static const Color subtitleText = Color.fromARGB(255, 35, 35, 35);
+  static const Color chipBackground = Color.fromARGB(24, 0, 140, 171);
 }

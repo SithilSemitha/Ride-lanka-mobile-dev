@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
 
 class DatePicker extends StatelessWidget {
-  const DatePicker({super.key});
+  final TextEditingController? controller;
+  const DatePicker({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class DatePicker extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         TextField(
+          controller: controller,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 1.5),
@@ -41,6 +43,8 @@ class DatePicker extends StatelessWidget {
             );
             if (picked != null) {
               // Handle selected date
+              controller?.text =
+                  '${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}';
             }
           },
         ),

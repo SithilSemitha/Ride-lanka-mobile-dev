@@ -3,7 +3,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
 
 class CountryCodePhone extends StatelessWidget {
-  const CountryCodePhone({super.key});
+  final TextEditingController? controller;
+  const CountryCodePhone({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class CountryCodePhone extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         IntlPhoneField(
+          controller: controller,
           decoration: InputDecoration(
             hintText: 'Phone Number',
             // 1. Normal State
