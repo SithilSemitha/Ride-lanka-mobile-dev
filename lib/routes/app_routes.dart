@@ -3,6 +3,7 @@ import 'package:ride_lanka/features/auth/screens/login_screen.dart';
 import 'package:ride_lanka/features/auth/screens/meta_data_screen.dart';
 import 'package:ride_lanka/features/auth/screens/password_reset_screen.dart';
 import 'package:ride_lanka/features/auth/screens/register_screen.dart';
+import 'package:ride_lanka/features/home/screens/main_home.dart';
 import 'package:ride_lanka/features/splash/screens/land_screen.dart';
 import 'package:ride_lanka/features/splash/screens/splash_screen.dart';
 
@@ -15,6 +16,7 @@ class AppRoutes {
   static const String register = '/register';
   static const String passwordreset = 'passwordreset';
   static const String metadata = '/metadata';
+  static const String home = '/home';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -23,5 +25,6 @@ class AppRoutes {
     register: (context) => const RegisterScreen(),
     passwordreset: (context) => const PasswordResetScreen(),
     metadata: (context) => const MetaDataScreen(),
+    home: (context) => const MainHome(), 
   };
 }

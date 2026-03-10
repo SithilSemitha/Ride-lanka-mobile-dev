@@ -27,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: AppColors.white,
 
       resizeToAvoidBottomInset: true,
-      body: Consumer<AuthProvider>(
+      body: Consumer<AuthController>(
         builder: (context, authProvider, child) {
           return Stack(
             children: [
@@ -157,12 +157,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 const SizedBox(height: 25),
 
-                                PrimaryButton(
-                                  buttonText: 'Register',
-                                  onPressed: () {
-                                    authProvider.signUp(context);
-                                  },
-                                ),
+                                authProvider.isLoading
+                                    ? const Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : PrimaryButton(
+                                        buttonText: 'Register',
+                                        onPressed: () {
+                                          authProvider.signUp(context);
+                                        },
+                                      ),
                                 const SizedBox(height: 15),
 
                                 BottomActions(

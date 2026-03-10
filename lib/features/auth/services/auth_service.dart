@@ -4,25 +4,18 @@ import 'package:logger/logger.dart';
 import '../models/user_model.dart';
 
 class AuthService {
-
   Future<User?> registerUser({
     required String email,
     required String password,
   }) async {
     try {
-
       final userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+          .createUserWithEmailAndPassword(email: email, password: password);
 
       return userCredential.user;
-
     } on FirebaseAuthException catch (e) {
-
       if (e.code == 'weak-password') {
-        Logger().e('The password provided is too weak.');
+        Logger().e('Weak password');
       } else if (e.code == 'email-already-in-use') {
         Logger().e('Email already exists');
       }
@@ -32,7 +25,6 @@ class AuthService {
   }
 
   Future<void> saveUser(UserModel user) async {
-
     await FirebaseFirestore.instance
         .collection('users')
         .doc(user.uid)

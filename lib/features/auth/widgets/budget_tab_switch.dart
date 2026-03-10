@@ -20,7 +20,7 @@ class _BudgetTabSwitchState extends State<BudgetTabSwitch> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.8; // Adjust as needed
-    
+
     return Container(
       width: width,
       height: 60,
