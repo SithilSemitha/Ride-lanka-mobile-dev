@@ -4,8 +4,12 @@ class UserModel {
   final String email;
   final DateTime dob;
   final String phoneNumber;
-  final String? uid;
-  final DateTime createdAt = DateTime.now();
+  final String uid;
+  final List<String> interests;
+  final List<String> travelTypes;
+  final String budget;
+
+  final DateTime createdAt;
 
   UserModel({
     required this.firstName,
@@ -13,8 +17,11 @@ class UserModel {
     required this.email,
     required this.dob,
     required this.phoneNumber,
-    this.uid,
-    required DateTime createdAt,
+    required this.uid,
+    required this.interests,
+    required this.travelTypes,
+    required this.budget,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,6 +31,9 @@ class UserModel {
       'email': email,
       'dob': dob.toIso8601String(),
       'phoneNumber': phoneNumber,
+      'interests': interests,
+      'travelTypes': travelTypes,
+      'budget': budget,
       'createdAt': createdAt.toIso8601String(),
     };
   }
@@ -36,6 +46,9 @@ class UserModel {
       email: map['email'] ?? '',
       dob: DateTime.parse(map['dob']),
       phoneNumber: map['phoneNumber'] ?? '',
+      interests: List<String>.from(map['interests'] ?? []),
+      travelTypes: List<String>.from(map['travelTypes'] ?? []),
+      budget: map['budget'] ?? '',
       createdAt: DateTime.parse(map['createdAt']),
     );
   }

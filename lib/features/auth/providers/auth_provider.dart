@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:ride_lanka/core/utils/validators.dart';
 
 class AuthProvider extends ChangeNotifier {
   final TextEditingController _firstNameController = TextEditingController();
@@ -26,21 +27,24 @@ class AuthProvider extends ChangeNotifier {
       _confirmPasswordController;
 
   Future<void> signUp(BuildContext context) async {
-    if (_firstNameController.text.isEmpty ||
-        _lastNameController.text.isEmpty ||
-        _emailController.text.isEmpty ||
-        _dobController.text.isEmpty ||
-        _phoneNumberController.text.isEmpty ||
-        _passwordController.text.isEmpty ||
-        _confirmPasswordController.text.isEmpty) {
-      Logger().e('Please fill in all fields');
-    } else if (RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(_emailController.text) ==
-        false) {
+    if (Validators.isEmpty(_firstNameController.text) ||
+        Validators.isEmpty(_lastNameController.text) ||
+        Validators.isEmpty(_emailController.text) ||
+        Validators.isEmpty(_dobController.text) ||
+        Validators.isEmpty(_phoneNumberController.text) ||
+        Validators.isEmpty(_passwordController.text) ||
+        Validators.isEmpty(_confirmPasswordController.text)) {
+      Logger().e('Please fill all fields');
+      return;
+    } else if (Validators.isValidEmail(_emailController.text) == false) {
       Logger().e('Please enter a valid email address');
-    } else if (_passwordController.text.trim().length < 6) {
+    } else if (Validators.isValidPassword(_passwordController.text) == false) {
       Logger().e('Password too weak');
-    } else if (_confirmPasswordController.text.trim() !=
-        _passwordController.text.trim()) {
+    } else if (Validators.doPasswordsMatch(
+          _passwordController.text,
+          _confirmPasswordController.text,
+        ) ==
+        false) {
       Logger().e("Password doesn't match");
     } else {
       // Proceed with sign-up logic
