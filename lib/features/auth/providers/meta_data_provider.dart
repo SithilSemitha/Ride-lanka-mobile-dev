@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ride_lanka/core/constants/app_dialogs.dart';
 import 'package:ride_lanka/features/auth/models/user_model.dart';
 import 'package:ride_lanka/features/auth/providers/auth_provider.dart';
 import 'package:ride_lanka/features/auth/services/auth_service.dart';
 import 'package:provider/provider.dart';
+import 'package:ride_lanka/routes/app_routes.dart';
 
 class MetaDataProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
@@ -43,7 +45,6 @@ class MetaDataProvider extends ChangeNotifier {
       notifyListeners();
 
       final authProvider = Provider.of<AuthController>(context, listen: false);
-
       final firebaseUser = FirebaseAuth.instance.currentUser;
 
       if (firebaseUser == null) {
@@ -65,14 +66,20 @@ class MetaDataProvider extends ChangeNotifier {
 
       await _authService.saveUser(user);
 
-      Navigator.popUntil(context, (route) => route.isFirst);
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Something went wrong")));
-    } finally {
+      // Ensure UI updates the loading state before navigating
       _isLoading = false;
       notifyListeners();
+
+      // Delay slightly to let the spinner disappear
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      Navigator.of(
+        context,
+      ).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      AppDialogs.loginFailedDialog(context);
     }
   }
 }

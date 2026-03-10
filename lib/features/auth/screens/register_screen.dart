@@ -18,6 +18,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -90,91 +91,97 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ],
                           ),
                           child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const HeaderText(
-                                  h1: "Let's travel you in",
-                                  h2: 'Discover Sri Lanka signup now',
-                                ),
-                                const SizedBox(height: 25),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const HeaderText(
+                                    h1: "Let's travel you in",
+                                    h2: 'Discover Sri Lanka signup now',
+                                  ),
+                                  const SizedBox(height: 25),
 
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: CustomTextfield(
-                                        labelText: 'First Name',
-                                        isRegister: false,
-                                        controller:
-                                            authProvider.firstNameController,
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: CustomTextfield(
+                                          labelText: 'First Name',
+                                          isRegister: false,
+                                          controller:
+                                              authProvider.firstNameController,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 15),
-                                    Expanded(
-                                      child: CustomTextfield(
-                                        labelText: 'Last Name',
-                                        isRegister: false,
-                                        controller:
-                                            authProvider.lastNameController,
+                                      const SizedBox(width: 15),
+                                      Expanded(
+                                        child: CustomTextfield(
+                                          labelText: 'Last Name',
+                                          isRegister: false,
+                                          controller:
+                                              authProvider.lastNameController,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 15),
 
-                                CustomTextfield(
-                                  labelText: 'Email',
-                                  isRegister: false,
-                                  controller: authProvider.emailController,
-                                ),
-                                const SizedBox(height: 15),
+                                  CustomTextfield(
+                                    labelText: 'Email',
+                                    isRegister: false,
+                                    controller: authProvider.emailController,
+                                  ),
+                                  const SizedBox(height: 15),
 
-                                DatePicker(
-                                  controller: authProvider.dobController,
-                                ),
-                                const SizedBox(height: 15),
+                                  DatePicker(
+                                    controller: authProvider.dobController,
+                                  ),
+                                  const SizedBox(height: 15),
 
-                                CountryCodePhone(
-                                  controller:
-                                      authProvider.phoneNumberController,
-                                ),
-                                const SizedBox(height: 15),
+                                  CountryCodePhone(
+                                    controller:
+                                        authProvider.phoneNumberController,
+                                  ),
+                                  const SizedBox(height: 15),
 
-                                CustomTextfield(
-                                  labelText: 'Password',
-                                  isRegister: false,
-                                  isPassword: true,
-                                  controller: authProvider.passwordController,
-                                ),
-                                const SizedBox(height: 15),
+                                  CustomTextfield(
+                                    labelText: 'Password',
+                                    isRegister: false,
+                                    isPassword: true,
+                                    controller: authProvider.passwordController,
+                                  ),
+                                  const SizedBox(height: 15),
 
-                                CustomTextfield(
-                                  labelText: 'Confirm Password',
-                                  isPassword: true,
-                                  isRegister: false,
-                                  controller:
-                                      authProvider.confirmPasswordController,
-                                ),
-                                const SizedBox(height: 25),
+                                  CustomTextfield(
+                                    labelText: 'Confirm Password',
+                                    isPassword: true,
+                                    isRegister: false,
+                                    controller:
+                                        authProvider.confirmPasswordController,
+                                  ),
+                                  const SizedBox(height: 25),
 
-                                authProvider.isLoading
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : PrimaryButton(
-                                        buttonText: 'Register',
-                                        onPressed: () {
-                                          authProvider.signUp(context);
-                                        },
-                                      ),
-                                const SizedBox(height: 15),
+                                  authProvider.isLoading
+                                      ? const Center(
+                                          child: CircularProgressIndicator(),
+                                        )
+                                      : PrimaryButton(
+                                          buttonText: 'Register',
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              authProvider.signUp(context);
+                                            }
+                                          },
+                                        ),
+                                  const SizedBox(height: 15),
 
-                                BottomActions(
-                                  title: 'Already have an account?',
-                                  actionText: 'Login',
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              ],
+                                  BottomActions(
+                                    title: 'Already have an account?',
+                                    actionText: 'Login',
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

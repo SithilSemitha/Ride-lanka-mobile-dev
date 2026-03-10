@@ -72,4 +72,27 @@ class AppDialogs {
       },
     );
   }
+
+  static void registerFailedDialog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: '',
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (context, anim1, anim2) {
+        return const Center(
+          child: CustomAlerts(
+            alertTitle: 'Registration Failed',
+            subTitle: 'Failed to register. Please try again.',
+          ),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return Transform.scale(
+          scale: Curves.easeInOut.transform(anim1.value),
+          child: FadeTransition(opacity: anim1, child: child),
+        );
+      },
+    );
+  }
 }

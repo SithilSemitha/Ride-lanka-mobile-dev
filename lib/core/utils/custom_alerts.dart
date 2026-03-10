@@ -64,8 +64,8 @@ class CustomAlerts extends StatelessWidget {
               PrimaryButton(
                 buttonText: buttonText ?? 'Try Again',
                 onPressed: () {
-                  buttonText == 'Login'
-                      ? Navigator.pushNamed(context, '/login')
+                  buttonText == 'OK'
+                      ? Navigator.pushNamed(context, '/home')
                       : Navigator.pop(context);
                 },
               ),

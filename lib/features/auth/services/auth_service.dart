@@ -17,6 +17,7 @@ class AuthService {
       if (e.code == 'weak-password') {
         Logger().e('Weak password');
       } else if (e.code == 'email-already-in-use') {
+       
         Logger().e('Email already exists');
       }
 

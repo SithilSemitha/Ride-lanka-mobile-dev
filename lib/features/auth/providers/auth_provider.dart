@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:ride_lanka/core/constants/app_dialogs.dart';
 import 'package:ride_lanka/core/utils/validators.dart';
 import 'package:ride_lanka/features/auth/services/auth_service.dart';
 import 'package:ride_lanka/routes/app_routes.dart';
@@ -68,8 +69,9 @@ class AuthController extends ChangeNotifier {
         password: _passwordController.text,
       );
 
-      if (user == null) {
-        throw Exception("Registration failed");
+      if (user == null && context.mounted) {
+        AppDialogs.registerFailedDialog(context);
+        return;
       }
 
       Navigator.pushReplacementNamed(context, AppRoutes.metadata);

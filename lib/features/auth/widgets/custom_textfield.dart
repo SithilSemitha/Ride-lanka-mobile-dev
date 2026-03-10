@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
+import 'package:ride_lanka/core/utils/validators.dart';
 import 'package:ride_lanka/routes/app_routes.dart';
 
 class CustomTextfield extends StatefulWidget {
@@ -36,11 +37,27 @@ class _CustomTextfieldState extends State<CustomTextfield> {
           ),
         ),
         const SizedBox(height: 8),
-        TextField(
+        TextFormField(
           controller: widget.controller,
-          onTapOutside: (event) => FocusScope.of(context).unfocus(),
           obscureText: widget.isPassword && _isObscure,
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "${widget.labelText} is required";
+            }
 
+            if (widget.labelText == "Email" &&
+                !Validators.isValidEmail(value)) {
+              return "Enter a valid email";
+            }
+
+            if (widget.labelText == "Password" &&
+                !Validators.isValidPassword(value)) {
+              return "Password must be stronger";
+            }
+
+            return null;
+          },
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -52,6 +69,14 @@ class _CustomTextfieldState extends State<CustomTextfield> {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 2),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
             suffixIcon: widget.isPassword
