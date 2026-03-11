@@ -47,29 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyASXU-vg4oC1smFCt4RTaZOcQ9tbnBvFqA',
-    appId: '1:571501237987:web:9cb406d3eac4b4c2dc17d6',
-    messagingSenderId: '571501237987',
-    projectId: 'ride-lanka-bc197',
-    authDomain: 'ride-lanka-bc197.firebaseapp.com',
-    storageBucket: 'ride-lanka-bc197.firebasestorage.app',
-    measurementId: 'G-1D1HM0BP17',
+    apiKey: 'AIzaSyAEL61TRoUex1li4UaJir4R1UvdEwsKuSg',
+    appId: '1:663316761309:web:32698555a3ca3f5eaa2934',
+    messagingSenderId: '663316761309',
+    projectId: 'ride-lanka-d4d5e',
+    authDomain: 'ride-lanka-d4d5e.firebaseapp.com',
+    storageBucket: 'ride-lanka-d4d5e.firebasestorage.app',
+    measurementId: 'G-Y4FCV3Y6KP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDf0l1ooJhuvjnYdMYUcJ8D1IgeDlNZrKA',
-    appId: '1:571501237987:android:a5b639df339c44aadc17d6',
-    messagingSenderId: '571501237987',
-    projectId: 'ride-lanka-bc197',
-    storageBucket: 'ride-lanka-bc197.firebasestorage.app',
+    apiKey: 'AIzaSyA4BfEwMQtbRlaCR-9NRKYAABXn054X08Q',
+    appId: '1:663316761309:android:8e63613d1919be98aa2934',
+    messagingSenderId: '663316761309',
+    projectId: 'ride-lanka-d4d5e',
+    storageBucket: 'ride-lanka-d4d5e.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCHIXIZPT4GZxCBtCun9bkIpZanSNYQGKU',
-    appId: '1:571501237987:ios:54e417139594a80fdc17d6',
-    messagingSenderId: '571501237987',
-    projectId: 'ride-lanka-bc197',
-    storageBucket: 'ride-lanka-bc197.firebasestorage.app',
+    apiKey: 'AIzaSyBGRaBlutd6P9RwSWbEYMvJvqaIW4mns9I',
+    appId: '1:663316761309:ios:fe27190326a80a77aa2934',
+    messagingSenderId: '663316761309',
+    projectId: 'ride-lanka-d4d5e',
+    storageBucket: 'ride-lanka-d4d5e.firebasestorage.app',
     iosBundleId: 'com.example.rideLanka',
   );
+
 }

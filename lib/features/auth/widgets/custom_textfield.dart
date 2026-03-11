@@ -7,12 +7,14 @@ class CustomTextfield extends StatefulWidget {
   final String labelText;
   final bool isPassword;
   final bool isRegister;
+  final TextInputType? keyboardType;
   final TextEditingController? controller;
   const CustomTextfield({
     super.key,
     required this.labelText,
     this.isPassword = false,
     this.isRegister = true,
+    this.keyboardType,
     this.controller,
   });
 
@@ -38,11 +40,17 @@ class _CustomTextfieldState extends State<CustomTextfield> {
         ),
         const SizedBox(height: 8),
         TextFormField(
+          style: TextStyle(fontSize: 14),
+          keyboardType: widget.keyboardType,
           controller: widget.controller,
           obscureText: widget.isPassword && _isObscure,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
           validator: (value) {
             if (value == null || value.isEmpty) {
+              if (widget.labelText == 'First Name' ||
+                  widget.labelText == 'Last Name') {
+                return "Required field";
+              }
               return "${widget.labelText} is required";
             }
 
@@ -61,8 +69,9 @@ class _CustomTextfieldState extends State<CustomTextfield> {
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: 16,
+              vertical: 5,
             ),
+
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 1.5),
               borderRadius: BorderRadius.circular(12),

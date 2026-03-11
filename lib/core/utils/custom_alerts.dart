@@ -5,13 +5,15 @@ import 'package:ride_lanka/widgets/primary_button.dart';
 class CustomAlerts extends StatelessWidget {
   final String alertTitle;
   final String subTitle;
-  final String? buttonText;
+  final String buttonText;
+  final VoidCallback? onPressed;
 
   const CustomAlerts({
     super.key,
     required this.alertTitle,
     required this.subTitle,
-    this.buttonText,
+    required this.buttonText,
+    required this.onPressed,
   });
 
   @override
@@ -62,13 +64,8 @@ class CustomAlerts extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               PrimaryButton(
-                buttonText: buttonText ?? 'Try Again',
-                onPressed: () {
-                  buttonText == 'OK'
-                      ? Navigator.pushNamed(context, '/home')
-                      : Navigator.pop(context);
-                },
-              ),
+                buttonText: buttonText,
+                onPressed: onPressed),
             ],
           ),
         ),

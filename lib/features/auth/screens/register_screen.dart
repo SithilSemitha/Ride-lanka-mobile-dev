@@ -107,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Expanded(
                                         child: CustomTextfield(
                                           labelText: 'First Name',
+                                          keyboardType: TextInputType.name,
                                           isRegister: false,
                                           controller:
                                               authProvider.firstNameController,
@@ -116,6 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Expanded(
                                         child: CustomTextfield(
                                           labelText: 'Last Name',
+                                          keyboardType: TextInputType.name,
                                           isRegister: false,
                                           controller:
                                               authProvider.lastNameController,
@@ -127,6 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                   CustomTextfield(
                                     labelText: 'Email',
+                                    keyboardType: TextInputType.emailAddress,
                                     isRegister: false,
                                     controller: authProvider.emailController,
                                   ),
@@ -145,6 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                   CustomTextfield(
                                     labelText: 'Password',
+                                    keyboardType: TextInputType.text,
                                     isRegister: false,
                                     isPassword: true,
                                     controller: authProvider.passwordController,
@@ -153,6 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                   CustomTextfield(
                                     labelText: 'Confirm Password',
+                                    keyboardType: TextInputType.text,
                                     isPassword: true,
                                     isRegister: false,
                                     controller:
@@ -161,8 +166,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   const SizedBox(height: 25),
 
                                   authProvider.isLoading
-                                      ? const Center(
-                                          child: CircularProgressIndicator(),
+                                      ?  Center(
+                                          child: CircularProgressIndicator(
+                                            color: AppColors.lowPrimaryColor,
+                                          ),
                                         )
                                       : PrimaryButton(
                                           buttonText: 'Register',

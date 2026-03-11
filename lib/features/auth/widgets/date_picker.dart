@@ -3,7 +3,13 @@ import 'package:ride_lanka/core/constants/app_colors.dart';
 
 class DatePicker extends StatelessWidget {
   final TextEditingController? controller;
-  const DatePicker({super.key, this.controller});
+  final String labelText;
+
+  const DatePicker({
+    super.key,
+    this.controller,
+    this.labelText = 'Date of Birth',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +17,7 @@ class DatePicker extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Date of Birth',
+          labelText,
           style: const TextStyle(
             color: AppColors.dividerText,
             fontWeight: FontWeight.w700,
@@ -20,7 +26,9 @@ class DatePicker extends StatelessWidget {
         const SizedBox(height: 8),
         TextField(
           controller: controller,
+          readOnly: true,
           decoration: InputDecoration(
+            hintText: 'DD/MM/YYYY',
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 1.5),
               borderRadius: BorderRadius.circular(12),
@@ -29,22 +37,25 @@ class DatePicker extends StatelessWidget {
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
-            hintText: 'DD/MM/YYYY',
-
             suffixIcon: Icon(Icons.event, color: AppColors.grey),
           ),
-          readOnly: true,
           onTap: () async {
+            // Only date part to prevent time issues
+            final today = DateTime.now();
+            final lastDate = DateTime(today.year, today.month, today.day);
+
             final DateTime? picked = await showDatePicker(
               context: context,
-              initialDate: DateTime.now(),
+              initialDate: lastDate,
               firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
+              lastDate: lastDate,
             );
+
             if (picked != null) {
-              // Handle selected date
               controller?.text =
-                  '${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}';
+                  '${picked.day.toString().padLeft(2, '0')}/'
+                  '${picked.month.toString().padLeft(2, '0')}/'
+                  '${picked.year}';
             }
           },
         ),

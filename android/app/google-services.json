@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "571501237987",
-    "project_id": "ride-lanka-bc197",
-    "storage_bucket": "ride-lanka-bc197.firebasestorage.app"
+    "project_number": "663316761309",
+    "project_id": "ride-lanka-d4d5e",
+    "storage_bucket": "ride-lanka-d4d5e.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:571501237987:android:a5b639df339c44aadc17d6",
+        "mobilesdk_app_id": "1:663316761309:android:8e63613d1919be98aa2934",
         "android_client_info": {
           "package_name": "com.example.ride_lanka"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDf0l1ooJhuvjnYdMYUcJ8D1IgeDlNZrKA"
+          "current_key": "AIzaSyA4BfEwMQtbRlaCR-9NRKYAABXn054X08Q"
         }
       ],
       "services": {

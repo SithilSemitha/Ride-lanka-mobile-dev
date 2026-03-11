@@ -5,6 +5,7 @@ import 'package:ride_lanka/features/auth/providers/auth_provider.dart';
 import 'package:ride_lanka/features/auth/providers/meta_data_provider.dart';
 import 'package:ride_lanka/routes/app_routes.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

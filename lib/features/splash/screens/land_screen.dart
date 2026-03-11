@@ -5,7 +5,6 @@ import 'package:ride_lanka/routes/app_routes.dart';
 
 class LandScreen extends StatefulWidget {
   const LandScreen({super.key});
-
   @override
   State<LandScreen> createState() => _LandScreenState();
 }

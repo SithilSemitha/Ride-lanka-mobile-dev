@@ -98,6 +98,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                           const SizedBox(height: 25),
                           const CustomTextfield(
                             labelText: 'Email',
+                            keyboardType: TextInputType.emailAddress,
                             isRegister: false,
                           ),
                           const SizedBox(height: 20),

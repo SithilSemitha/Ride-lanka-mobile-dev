@@ -71,7 +71,7 @@ class MetaDataProvider extends ChangeNotifier {
       notifyListeners();
 
       // Delay slightly to let the spinner disappear
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 100));
 
       Navigator.of(
         context,

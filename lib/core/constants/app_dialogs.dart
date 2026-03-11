@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/utils/custom_alerts.dart';
+import 'package:ride_lanka/routes/app_routes.dart';
 
 class AppDialogs {
   static void loginFailedDialog(BuildContext context) {
@@ -9,10 +10,14 @@ class AppDialogs {
       barrierLabel: '',
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (context, anim1, anim2) {
-        return const Center(
+        return Center(
           child: CustomAlerts(
             alertTitle: 'Failed to Login',
             subTitle: 'You have entered wrong email or password',
+            buttonText: 'Try Again',
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         );
       },
@@ -32,11 +37,14 @@ class AppDialogs {
       barrierLabel: '',
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (context, anim1, anim2) {
-        return const Center(
+        return Center(
           child: CustomAlerts(
             alertTitle: 'Registered',
             subTitle: 'You have registered successfully',
             buttonText: 'Login',
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         );
       },
@@ -56,11 +64,14 @@ class AppDialogs {
       barrierLabel: '',
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (context, anim1, anim2) {
-        return const Center(
+        return Center(
           child: CustomAlerts(
             alertTitle: 'Sent Successfully',
             subTitle: 'Please check your email for the password reset link',
-            buttonText: 'Login',
+            buttonText: 'OK',
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, AppRoutes.login);
+            },
           ),
         );
       },
@@ -80,10 +91,12 @@ class AppDialogs {
       barrierLabel: '',
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (context, anim1, anim2) {
-        return const Center(
+        return Center(
           child: CustomAlerts(
             alertTitle: 'Registration Failed',
             subTitle: 'Failed to register. Please try again.',
+            buttonText: 'Try Again',
+            onPressed: () => Navigator.pop(context),
           ),
         );
       },

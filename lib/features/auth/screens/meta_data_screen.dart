@@ -126,10 +126,26 @@ class _MetaDataScreenState extends State<MetaDataScreen> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 20),
-
                   horizontalStepper(provider),
+                  const SizedBox(height: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Tell us what you love',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'We’ll use this to personalize your Sri Lankan\ntravel experience from peaks to placing.',
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
+                    ],
+                  ),
 
                   const SizedBox(height: 20),
 
