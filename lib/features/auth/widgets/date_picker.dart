@@ -4,11 +4,13 @@ import 'package:ride_lanka/core/constants/app_colors.dart';
 class DatePicker extends StatelessWidget {
   final TextEditingController? controller;
   final String labelText;
+  final bool enabled;
 
   const DatePicker({
     super.key,
     this.controller,
     this.labelText = 'Date of Birth',
+    this.enabled = true,
   });
 
   @override
@@ -24,9 +26,16 @@ class DatePicker extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        TextField(
+        TextFormField(
           controller: controller,
+          enabled: enabled,
           readOnly: true,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "$labelText is required";
+            }
+            return null;
+          },
           decoration: InputDecoration(
             hintText: 'DD/MM/YYYY',
             enabledBorder: OutlineInputBorder(
@@ -35,6 +44,14 @@ class DatePicker extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 2),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
             suffixIcon: Icon(Icons.event, color: AppColors.grey),

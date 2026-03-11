@@ -14,4 +14,5 @@ class AppColors {
   static const Color errorBorder = Color(0xFFFF4D4D);
   static const Color subtitleText = Color.fromARGB(255, 35, 35, 35);
   static const Color chipBackground = Color.fromARGB(24, 0, 140, 171);
+  static const Color stepDivider = Color.fromRGBO(76, 175, 80, 1);
 }

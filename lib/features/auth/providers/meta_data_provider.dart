@@ -66,16 +66,17 @@ class MetaDataProvider extends ChangeNotifier {
 
       await _authService.saveUser(user);
 
-      // Ensure UI updates the loading state before navigating
+     
       _isLoading = false;
       notifyListeners();
 
-      // Delay slightly to let the spinner disappear
+     
       await Future.delayed(const Duration(milliseconds: 100));
 
       Navigator.of(
         context,
       ).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+      AppDialogs.registerSuccessDialog(context);
     } catch (e) {
       _isLoading = false;
       notifyListeners();

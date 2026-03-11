@@ -109,6 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           labelText: 'First Name',
                                           keyboardType: TextInputType.name,
                                           isRegister: false,
+                                          enabled: !authProvider.isLoading,
                                           controller:
                                               authProvider.firstNameController,
                                         ),
@@ -119,6 +120,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           labelText: 'Last Name',
                                           keyboardType: TextInputType.name,
                                           isRegister: false,
+                                          enabled: !authProvider.isLoading,
+
                                           controller:
                                               authProvider.lastNameController,
                                         ),
@@ -131,16 +134,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     labelText: 'Email',
                                     keyboardType: TextInputType.emailAddress,
                                     isRegister: false,
+                                    enabled: !authProvider.isLoading,
                                     controller: authProvider.emailController,
                                   ),
                                   const SizedBox(height: 15),
 
                                   DatePicker(
                                     controller: authProvider.dobController,
+                                    enabled: !authProvider.isLoading,
                                   ),
                                   const SizedBox(height: 15),
 
                                   CountryCodePhone(
+                                    enabled: !authProvider.isLoading,
                                     controller:
                                         authProvider.phoneNumberController,
                                   ),
@@ -151,6 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     keyboardType: TextInputType.text,
                                     isRegister: false,
                                     isPassword: true,
+                                    enabled: !authProvider.isLoading,
                                     controller: authProvider.passwordController,
                                   ),
                                   const SizedBox(height: 15),
@@ -160,13 +167,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     keyboardType: TextInputType.text,
                                     isPassword: true,
                                     isRegister: false,
+                                    enabled: !authProvider.isLoading,
                                     controller:
                                         authProvider.confirmPasswordController,
                                   ),
                                   const SizedBox(height: 25),
 
                                   authProvider.isLoading
-                                      ?  Center(
+                                      ? Center(
                                           child: CircularProgressIndicator(
                                             color: AppColors.lowPrimaryColor,
                                           ),

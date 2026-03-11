@@ -48,14 +48,14 @@ class _LandScreenState extends State<LandScreen> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24),
               width: double.infinity,
-              height: 331,
+              height: 260,
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
               child: SafeArea(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       'Ready to Discover\n Sri Lanka?',

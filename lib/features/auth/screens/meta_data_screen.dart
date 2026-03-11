@@ -37,7 +37,7 @@ class _MetaDataScreenState extends State<MetaDataScreen> {
     bool step3Done = provider.budget != null;
 
     Color getColor(bool completed) =>
-        completed ? AppColors.lowPrimaryColor : AppColors.chipBackground;
+        completed ? AppColors.stepDivider : AppColors.chipBackground;
 
     return Row(
       children: [
@@ -129,31 +129,32 @@ class _MetaDataScreenState extends State<MetaDataScreen> {
                   const SizedBox(height: 20),
                   horizontalStepper(provider),
                   const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Tell us what you love',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'We’ll use this to personalize your Sri Lankan\ntravel experience from peaks to placing.',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 20),
-
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Tell us what you love',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'We’ll use this to personalize your Sri Lankan\ntravel experience from peaks to placing.',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
                           const Text(
                             'Your interests',
                             style: TextStyle(
@@ -257,7 +258,9 @@ class _MetaDataScreenState extends State<MetaDataScreen> {
                           const SizedBox(height: 40),
 
                           provider.isLoading
-                              ? const Center(child: CircularProgressIndicator())
+                              ? const Center(child: CircularProgressIndicator(
+                                  color: AppColors.primaryColor,
+                              ))
                               : PrimaryButton(
                                   buttonText: 'Continue',
                                   onPressed: provider.isValid

@@ -41,7 +41,7 @@ class AppDialogs {
           child: CustomAlerts(
             alertTitle: 'Registered',
             subTitle: 'You have registered successfully',
-            buttonText: 'Login',
+            buttonText: 'OK',
             onPressed: () {
               Navigator.pop(context);
             },

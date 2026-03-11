@@ -4,7 +4,9 @@ import 'package:ride_lanka/core/constants/app_colors.dart';
 
 class CountryCodePhone extends StatelessWidget {
   final TextEditingController? controller;
-  const CountryCodePhone({super.key, this.controller});
+  final bool enabled;
+
+  const CountryCodePhone({super.key, this.controller, this.enabled = true});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,10 @@ class CountryCodePhone extends StatelessWidget {
         const SizedBox(height: 8),
         IntlPhoneField(
           controller: controller,
+          enabled: enabled,
           decoration: InputDecoration(
             hintText: 'Phone Number',
-            // 1. Normal State
+
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 1.5),
               borderRadius: BorderRadius.circular(12),
@@ -32,19 +35,13 @@ class CountryCodePhone extends StatelessWidget {
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
-            // 2. Error State
+
             errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.errorBorder,
-                width: 1.5,
-              ), // Matches enabledBorder
+              borderSide: BorderSide(color: AppColors.errorBorder, width: 1.5),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.errorBorder,
-                width: 2,
-              ), // Matches focusedBorder
+              borderSide: BorderSide(color: AppColors.errorBorder, width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
             contentPadding: const EdgeInsets.symmetric(

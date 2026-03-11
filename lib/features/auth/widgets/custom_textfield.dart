@@ -7,6 +7,7 @@ class CustomTextfield extends StatefulWidget {
   final String labelText;
   final bool isPassword;
   final bool isRegister;
+  final bool enabled;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   const CustomTextfield({
@@ -14,6 +15,7 @@ class CustomTextfield extends StatefulWidget {
     required this.labelText,
     this.isPassword = false,
     this.isRegister = true,
+    this.enabled = true,
     this.keyboardType,
     this.controller,
   });
@@ -43,6 +45,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
           style: TextStyle(fontSize: 14),
           keyboardType: widget.keyboardType,
           controller: widget.controller,
+          enabled: widget.enabled,
           obscureText: widget.isPassword && _isObscure,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
           validator: (value) {
@@ -51,6 +54,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                   widget.labelText == 'Last Name') {
                 return "Required field";
               }
+
               return "${widget.labelText} is required";
             }
 
@@ -72,6 +76,11 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               vertical: 5,
             ),
 
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.buttonBorder, width: 1.5),
+              borderRadius: BorderRadius.circular(12),
+            ),
+
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.buttonBorder, width: 1.5),
               borderRadius: BorderRadius.circular(12),
@@ -88,6 +97,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               borderSide: const BorderSide(color: Colors.red, width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
+
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
