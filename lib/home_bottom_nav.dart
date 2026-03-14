@@ -33,9 +33,8 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled),
+            icon: Icon(Icons.home),
             label: 'Home',
-
             activeIcon: Icon(Icons.home),
           ),
 
