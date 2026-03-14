@@ -34,6 +34,16 @@ class AuthController extends ChangeNotifier {
   TextEditingController get confirmPasswordController =>
       _confirmPasswordController;
 
+  void clearControllers() {
+    _firstNameController.clear();
+    _lastNameController.clear();
+    _emailController.clear();
+    _dobController.clear();
+    _phoneNumberController.clear();
+    _passwordController.clear();
+    _confirmPasswordController.clear();
+  }
+
   Future<void> signUp(BuildContext context) async {
     try {
       if (Validators.isEmpty(_firstNameController.text) ||
@@ -84,6 +94,59 @@ class AuthController extends ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future<void> signIn(BuildContext context) async {
+    try {
+      if (Validators.isEmpty(_emailController.text) ||
+          Validators.isEmpty(_passwordController.text)) {
+        throw Exception("Please fill all fields");
+      }
+      if (!Validators.isValidEmail(_emailController.text)) {
+        throw Exception("Invalid email");
+      }
+      _isLoading = true;
+      notifyListeners();
+
+      final user = await AuthService().signInUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        context: context,
+      );
+
+      if (user == null && context.mounted) {
+        Logger().e("Login Failed: User is null");
+        return;
+      }
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.homeBottomNav,
+        (route) => false,
+      );
+    } catch (error) {
+      Logger().e("Login Error: $error");
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error.toString())));
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _authService.signOutUser();
+      clearControllers();
+      Navigator.pushReplacementNamed(context, AppRoutes.login);
+    } catch (error) {
+      Logger().e("Sign Out Error: $error");
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error.toString())));
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:ride_lanka/routes/app_routes.dart';
 
 class LandScreen extends StatefulWidget {
   const LandScreen({super.key});
+
   @override
   State<LandScreen> createState() => _LandScreenState();
 }
@@ -12,61 +13,81 @@ class LandScreen extends StatefulWidget {
 class _LandScreenState extends State<LandScreen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final bool isTablet = size.width > 600;
+
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: Stack(
         children: [
-          Image.asset(
-            AppAssets.landBack,
-            filterQuality: FilterQuality.high,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            height: double.infinity,
+          /// Background
+          Positioned.fill(
+            child: Image.asset(
+              AppAssets.landBack,
+              filterQuality: FilterQuality.high,
+              fit: BoxFit.cover,
+            ),
           ),
-          Positioned(
-            top: 310,
-            left: 0,
-            right: 0,
+
+          /// Logo Section (Responsive Center)
+          SafeArea(
             child: Column(
               children: [
-                Image.asset(AppAssets.logo, color: AppColors.black),
-                const SizedBox(height: 10),
-                Text(
-                  'Ride\nLanka',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ),
+                SizedBox(height: size.height * 0.25),
+
+                Column(
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        AppAssets.logo,
+                        color: AppColors.black,
+                        width: isTablet ? 70 : 50,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Ride\nLanka',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
+
+          /// Bottom Card
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24),
               width: double.infinity,
-              height: 260,
-              decoration: BoxDecoration(
+              height: size.height * 0.32,
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              decoration: const BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
               child: SafeArea(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       'Ready to Discover\n Sri Lanka?',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 34,
+                        fontSize: isTablet ? 38 : 34,
                         fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor,
                         fontFamily: 'Helvetica',
                       ),
                     ),
+
+                    /// Button
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.login);
@@ -78,7 +99,7 @@ class _LandScreenState extends State<LandScreen> {
                           color: AppColors.lowPrimaryColor,
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Your journey starts here',
                             style: TextStyle(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_assets.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
@@ -17,9 +18,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.land);
-    });
+    if (FirebaseAuth.instance.currentUser != null) {
+      Timer(const Duration(seconds: 3), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.homeBottomNav);
+      });
+    } else {
+      Timer(const Duration(seconds: 3), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.land);
+      });
+    }
   }
 
   @override

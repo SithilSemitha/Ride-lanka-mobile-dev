@@ -75,7 +75,7 @@ class MetaDataProvider extends ChangeNotifier {
 
       Navigator.of(
         context,
-      ).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+      ).pushNamedAndRemoveUntil(AppRoutes.homeBottomNav, (route) => false);
       AppDialogs.registerSuccessDialog(context);
     } catch (e) {
       _isLoading = false;

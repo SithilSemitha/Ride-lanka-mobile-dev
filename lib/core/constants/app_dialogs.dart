@@ -13,7 +13,7 @@ class AppDialogs {
         return Center(
           child: CustomAlerts(
             alertTitle: 'Failed to Login',
-            subTitle: 'You have entered wrong email or password',
+            subTitle: 'Please check your email and password',
             buttonText: 'Try Again',
             onPressed: () {
               Navigator.pop(context);

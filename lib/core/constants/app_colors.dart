@@ -15,4 +15,5 @@ class AppColors {
   static const Color subtitleText = Color.fromARGB(255, 35, 35, 35);
   static const Color chipBackground = Color.fromARGB(24, 0, 140, 171);
   static const Color stepDivider = Color.fromRGBO(76, 175, 80, 1);
+  static const Color bottomNavBackground = Color(0xFFF6F6F6);
 }

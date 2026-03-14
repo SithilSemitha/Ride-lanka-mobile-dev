@@ -12,7 +12,6 @@ import 'package:ride_lanka/widgets/primary_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
-
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -23,10 +22,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bool isTablet = size.width > 600;
-
     return Scaffold(
       backgroundColor: AppColors.white,
-
       resizeToAvoidBottomInset: true,
       body: Consumer<AuthController>(
         builder: (context, authProvider, child) {
@@ -39,12 +36,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-
               SafeArea(
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-
                     Image.asset(
                       AppAssets.logo,
                       color: AppColors.black,
@@ -61,7 +56,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-
                     Expanded(
                       child: Align(
                         alignment: Alignment.topCenter,
@@ -101,7 +95,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     h2: 'Discover Sri Lanka signup now',
                                   ),
                                   const SizedBox(height: 25),
-
                                   Row(
                                     children: [
                                       Expanded(
@@ -121,7 +114,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           keyboardType: TextInputType.name,
                                           isRegister: false,
                                           enabled: !authProvider.isLoading,
-
                                           controller:
                                               authProvider.lastNameController,
                                         ),
@@ -129,7 +121,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ],
                                   ),
                                   const SizedBox(height: 15),
-
                                   CustomTextfield(
                                     labelText: 'Email',
                                     keyboardType: TextInputType.emailAddress,
@@ -138,20 +129,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     controller: authProvider.emailController,
                                   ),
                                   const SizedBox(height: 15),
-
                                   DatePicker(
                                     controller: authProvider.dobController,
                                     enabled: !authProvider.isLoading,
                                   ),
                                   const SizedBox(height: 15),
-
                                   CountryCodePhone(
                                     enabled: !authProvider.isLoading,
                                     controller:
                                         authProvider.phoneNumberController,
                                   ),
                                   const SizedBox(height: 15),
-
                                   CustomTextfield(
                                     labelText: 'Password',
                                     keyboardType: TextInputType.text,
@@ -161,7 +149,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     controller: authProvider.passwordController,
                                   ),
                                   const SizedBox(height: 15),
-
                                   CustomTextfield(
                                     labelText: 'Confirm Password',
                                     keyboardType: TextInputType.text,
@@ -172,7 +159,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         authProvider.confirmPasswordController,
                                   ),
                                   const SizedBox(height: 25),
-
                                   authProvider.isLoading
                                       ? Center(
                                           child: CircularProgressIndicator(
@@ -189,7 +175,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           },
                                         ),
                                   const SizedBox(height: 15),
-
                                   BottomActions(
                                     title: 'Already have an account?',
                                     actionText: 'Login',

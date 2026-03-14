@@ -8,6 +8,7 @@ class CustomTextfield extends StatefulWidget {
   final bool isPassword;
   final bool isRegister;
   final bool enabled;
+  
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   const CustomTextfield({
