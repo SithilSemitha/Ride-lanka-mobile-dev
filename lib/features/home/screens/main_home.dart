@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_assets.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
-import 'package:ride_lanka/features/home/data/place_data.dart';
+import 'package:ride_lanka/features/home/data/nearby_place_data.dart';
+import 'package:ride_lanka/features/home/data/popular_place_data.dart';
 import 'package:ride_lanka/features/home/models/category_model.dart';
 import 'package:ride_lanka/features/home/widgets/category_item.dart';
-import 'package:ride_lanka/features/home/widgets/place_card.dart';
+import 'package:ride_lanka/features/home/widgets/nearby_place_card.dart';
+import 'package:ride_lanka/features/home/widgets/popular_place_card.dart';
 
 const String helvetica1 = 'Helvetica1';
 
@@ -24,22 +26,34 @@ class _MainHomeState extends State<MainHome> {
     CategoryModel(label: 'Wildlife', icon: AppAssets.wildlifeIcon),
   ];
 
-  PlaceData placeData = PlaceData();
+  NearbyPlaceData nearbyPlaceData = NearbyPlaceData();
+  PopularPlaceData popularPlaceData = PopularPlaceData();
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final hPad = size.width * 0.05;
+
     return Scaffold(
       backgroundColor: AppColors.bottomNavBackground,
       body: Stack(
         children: [
-          Image.asset(
-            AppAssets.homeTopDesign,
-            filterQuality: FilterQuality.high,
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              AppAssets.homeTopDesign,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+            ),
           ),
+
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: hPad, vertical: 20),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -52,7 +66,7 @@ class _MainHomeState extends State<MainHome> {
                             'Hi, Thisara',
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 26,
+                              fontSize: size.width * 0.065,
                               fontFamily: helvetica1,
                             ),
                           ),
@@ -60,7 +74,7 @@ class _MainHomeState extends State<MainHome> {
                             'Ratnapura, Sri Lanka',
                             style: TextStyle(
                               color: AppColors.currentLocationText,
-                              fontSize: 16,
+                              fontSize: size.width * 0.038,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -69,34 +83,33 @@ class _MainHomeState extends State<MainHome> {
                       Image.asset(
                         AppAssets.logo,
                         color: AppColors.black,
-                        width: 40,
-                        height: 40,
+                        width: size.width * 0.10,
+                        height: size.width * 0.10,
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: size.height * 0.025),
+
                   Container(
                     width: double.infinity,
                     height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: 320,
+                        Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(
-                                left: 20,
+                              contentPadding: const EdgeInsets.only(
+                                left: 10,
                                 top: 13,
                               ),
                               prefixIcon: IconButton(
                                 onPressed: () {},
-                                icon: Icon(Icons.search),
+                                icon: const Icon(Icons.search),
                               ),
                               hintText: 'Search destinations',
                               border: InputBorder.none,
@@ -112,49 +125,114 @@ class _MainHomeState extends State<MainHome> {
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.filter_list),
+                          icon: const Icon(Icons.filter_list),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 80),
-                  Row(
+                ],
+              ),
+            ),
+          ),
+
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: size.height * 0.23),
+
+                Container(
+                  color: Colors.transparent,
+                  padding: EdgeInsets.symmetric(horizontal: hPad, vertical: 12),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: categories
                         .map(
                           (cat) => CategoryItem(
                             icon: cat.icon,
                             label: cat.label,
-                            onTap: () => (),
+                            onTap: () {},
                           ),
                         )
                         .toList(),
                   ),
-                  SizedBox(height: 30),
-                  Text(
-                    'Nearby',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: 20,
-                      fontFamily: helvetica1,
-                      fontWeight: FontWeight.w600,
+                ),
+
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: size.height * 0.025),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: hPad),
+                          child: Text(
+                            'Nearby',
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 20,
+                              fontFamily: helvetica1,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        SizedBox(
+                          height: size.height * 0.3,
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            padding: EdgeInsets.symmetric(horizontal: hPad),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: nearbyPlaceData.places.length,
+                            itemBuilder: (context, index) {
+                              return NearbyPlaceCard(
+                                place: nearbyPlaceData.places[index],
+                              );
+                            },
+                          ),
+                        ),
+
+                        SizedBox(height: size.height * 0.025),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: hPad),
+                          child: Text(
+                            'Popular',
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 20,
+                              fontFamily: helvetica1,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: hPad),
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: popularPlaceData.popularPlaces.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(height: 12),
+                            itemBuilder: (context, index) {
+                              return PopularPlaceCard(
+                                place: popularPlaceData.popularPlaces[index],
+                              );
+                            },
+                          ),
+                        ),
+
+                        SizedBox(height: size.height * 0.04),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 20),
-                  SizedBox(
-                    height: 280,
-                    child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: placeData.places.length,
-                      itemBuilder: (context, index) {
-                        return PlaceCard(place: placeData.places[index]);
-                      },
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

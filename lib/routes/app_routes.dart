@@ -4,8 +4,11 @@ import 'package:ride_lanka/features/auth/screens/meta_data_screen.dart';
 import 'package:ride_lanka/features/auth/screens/password_reset_screen.dart';
 import 'package:ride_lanka/features/auth/screens/register_screen.dart';
 import 'package:ride_lanka/features/home/screens/main_home.dart';
+import 'package:ride_lanka/features/profile/screens/profile_screen.dart';
 import 'package:ride_lanka/features/splash/screens/land_screen.dart';
 import 'package:ride_lanka/features/splash/screens/splash_screen.dart';
+import 'package:ride_lanka/features/trip/screens/trip_plan_screen.dart';
+import 'package:ride_lanka/features/wishlist/screens/wishlist_screen.dart';
 import 'package:ride_lanka/home_bottom_nav.dart';
 
 class AppRoutes {
@@ -19,6 +22,9 @@ class AppRoutes {
   static const String metadata = '/metadata';
   static const String homeBottomNav = '/homeBottomNav';
   static const String home = '/home';
+  static const String wishlist = '/wishlist';
+  static const String tripPlan = '/tripPlan';
+  static const String profile = '/profile';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -28,6 +34,9 @@ class AppRoutes {
     passwordreset: (context) => const PasswordResetScreen(),
     metadata: (context) => const MetaDataScreen(),
     homeBottomNav: (context) => const HomeBottomNav(),
-    home: (context) => const MainHome(), 
+    home: (context) => const MainHome(),
+    wishlist: (context) => const WishlistScreen(),
+    tripPlan: (context) => const TripPlanScreen(),
+    profile: (context) => const ProfileScreen(),
   };
 }

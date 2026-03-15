@@ -1,17 +1,17 @@
-import 'package:ride_lanka/features/home/models/place_model.dart';
+import 'package:ride_lanka/features/home/models/nearby_place_model.dart';
 
-class PlaceData {
-  final List<PlaceModel> places = [
-    PlaceModel(
+class NearbyPlaceData {
+  final List<NearbyPlaceModel> places = [
+    NearbyPlaceModel(
       title: 'Sri Dalada Maligawa',
       category: 'Culture',
       distance: '125 km',
       rating: 4.5,
       reviewsCount: 120,
       imageUrl:
-          'https://w0.peakpx.com/wallpaper/573/779/HD-wallpaper-dalada-maligawa-buddha-iphone-kandy-lanka-mobile-srilanka-srilankan-temple.jpg',
+          'https://bpu-images-v1.s3.eu-north-1.amazonaws.com/uploads/1721634681262_Sri%20Dalada%20Maligawa%201.jpg',
     ),
-    PlaceModel(
+    NearbyPlaceModel(
       title: 'Yala National Park',
       category: 'Wildlife',
       distance: '15 km',
@@ -20,7 +20,7 @@ class PlaceData {
       imageUrl:
           'https://adventuresnolimits.com/wp-content/uploads/2023/05/Yala_National_Park_Sri_Lanka_2012-przerobione.jpg',
     ),
-    PlaceModel(
+    NearbyPlaceModel(
       title: 'Ravana Falls',
       category: 'Waterfall',
       distance: '25 km',

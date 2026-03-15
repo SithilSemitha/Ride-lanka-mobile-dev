@@ -17,4 +17,5 @@ class AppColors {
   static const Color stepDivider = Color.fromRGBO(76, 175, 80, 1);
   static const Color bottomNavBackground = Color(0xFFF6F6F6);
   static const Color currentLocationText = Colors.amber;
+  static const Color favoriteColor = Colors.red;
 }

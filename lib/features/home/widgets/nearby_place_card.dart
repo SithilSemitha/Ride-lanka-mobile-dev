@@ -1,11 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:ride_lanka/features/home/models/place_model.dart';
+import 'package:ride_lanka/core/constants/app_colors.dart';
+import 'package:ride_lanka/features/home/models/nearby_place_model.dart';
 
-class PlaceCard extends StatelessWidget {
-  final PlaceModel place;
+class NearbyPlaceCard extends StatelessWidget {
+  final NearbyPlaceModel place;
 
-  const PlaceCard({super.key, required this.place});
+  const NearbyPlaceCard({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,9 @@ class PlaceCard extends StatelessWidget {
               backgroundColor: Colors.black26,
               child: Icon(
                 place.isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: place.isFavorite ? Colors.red : Colors.white,
+                color: place.isFavorite
+                    ? AppColors.favoriteColor
+                    : AppColors.white,
               ),
             ),
           ),

@@ -15,21 +15,28 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final radius = size.width * 0.07;
+
     return GestureDetector(
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           CircleAvatar(
-            radius: 28,
+            radius: radius,
             backgroundColor: const Color(0xFF5BA3B2),
-            child: SvgPicture.asset(icon, width: 26, height: 26),
+            child: SvgPicture.asset(
+              icon,
+              width: radius * 0.85,
+              height: radius * 0.85,
+            ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: size.width * 0.030,
               fontWeight: FontWeight.w500,
               fontFamily: 'Helvetica1',
             ),
