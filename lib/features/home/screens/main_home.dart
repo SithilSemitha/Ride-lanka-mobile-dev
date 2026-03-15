@@ -107,10 +107,7 @@ class _MainHomeState extends State<MainHome> {
                                 left: 10,
                                 top: 13,
                               ),
-                              prefixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.search),
-                              ),
+                              prefixIcon: const Icon(Icons.search),
                               hintText: 'Search destinations',
                               border: InputBorder.none,
                             ),

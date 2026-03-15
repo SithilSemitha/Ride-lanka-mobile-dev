@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ride_lanka/core/constants/app_colors.dart';
 import 'package:ride_lanka/features/auth/providers/auth_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bottomNavBackground,
       body: Center(
         child: IconButton(
           onPressed: () {
