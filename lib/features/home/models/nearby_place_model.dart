@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NearbyPlaceModel {
+  final String id;
   final String title;
   final String category;
   final String distance;
@@ -10,6 +11,7 @@ class NearbyPlaceModel {
   final bool isFavorite;
 
   NearbyPlaceModel({
+    required this.id,
     required this.title,
     required this.category,
     required this.distance,
@@ -26,6 +28,7 @@ class NearbyPlaceModel {
     final data = doc.data() as Map<String, dynamic>?;
     if (data == null) {
       return NearbyPlaceModel(
+        id: doc.id,
         title: 'Unknown',
         category: 'Destination',
         distance: calculatedDistance,
@@ -41,6 +44,7 @@ class NearbyPlaceModel {
         : _fallbackImage(data['category'] as String? ?? '');
 
     return NearbyPlaceModel(
+      id: doc.id,
       title: data['name'] ?? 'Unknown',
       category: data['category'] ?? 'Destination',
       distance: calculatedDistance,
@@ -54,25 +58,25 @@ class NearbyPlaceModel {
   static String _fallbackImage(String category) {
     const Map<String, String> categoryImages = {
       'Religious':
-          'https://images.unsplash.com/photo-1624647970792-71ab523b09de?w=800&q=80',
+          'https://d3gpg9xwvhoccm.cloudfront.net/2019/03/thuparamya.jpg',
       'Beach':
           'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
       'Wildlife':
           'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80',
       'Culture':
-          'https://images.unsplash.com/photo-1588096344390-8b0101b44917?w=800&q=80',
+          'https://thesingaporetouristpass.com.sg/wp-content/uploads/2020/09/11.BuddhaToothRelic_1-scaled-1.jpg',
       'Hiking':
-          'https://images.unsplash.com/photo-1558223681-3be2cdfae513?w=800&q=80',
+          'https://www.travelandleisure.com/thmb/OmGhzSe-6Q6aC3aeCoZfdoBAs08=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/19-mount-rainier-national-park-washington-BESTHIKE0407-1b2ae69a788f49a996e64ff38f05275a.jpg',
       'Nature':
           'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80',
       'Adventure':
           'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=800&q=80',
       'Historical':
-          'https://images.unsplash.com/photo-1620216637380-4df2f2a71bf6?w=800&q=80',
+          'https://lh7-us.googleusercontent.com/0ok5LCBmiioUwTpavyKDguR4QoTnyVLOFmoXAgfUjveBxNWgPXQ4aSMyLdzJsuRpryUakHdWOEOnzx3dH2cmapaXxOOWjbPAuh_dG4NBOtYcwinKhXQmThJfsoD5bwF3HxH5yekfXo9c-0jhpoCH1g',
       'Food':
           'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
     };
     return categoryImages[category] ??
-        'https://images.unsplash.com/photo-1588096344390-8b0101b44917?w=800&q=80';
+        'https://industry.fersa.com/media/catalog/product/cache/44f599743c1dc4f12bba69d4eec200c5/n/k/nke_dummy_npa.png';
   }
 }

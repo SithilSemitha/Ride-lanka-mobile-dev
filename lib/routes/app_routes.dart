@@ -5,6 +5,7 @@ import 'package:ride_lanka/features/auth/screens/password_reset_screen.dart';
 import 'package:ride_lanka/features/auth/screens/register_screen.dart';
 import 'package:ride_lanka/features/home/screens/main_home.dart';
 import 'package:ride_lanka/features/badges/screens/badges_info.dart';
+import 'package:ride_lanka/features/home/screens/place_details.dart';
 import 'package:ride_lanka/features/profile/screens/profile_screen.dart';
 import 'package:ride_lanka/features/quests/screens/quests_screen.dart';
 import 'package:ride_lanka/features/splash/screens/land_screen.dart';
@@ -31,7 +32,7 @@ class AppRoutes {
   static const String badgesInfo = '/badges';
   static const String quests = '/quests';
   static const String tripHistory = '/history';
-
+  static const String placeDetails = '/placeDetails';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -47,6 +48,7 @@ class AppRoutes {
     profile: (context) => const ProfileScreen(),
     badgesInfo: (context) => const BadgesInfo(),
     quests: (context) => const QuestsScreen(),
-    tripHistory: (context) => const TripHistory()
+    tripHistory: (context) => const TripHistory(),
+    placeDetails: (context) => const PlaceDetails(),
   };
 }

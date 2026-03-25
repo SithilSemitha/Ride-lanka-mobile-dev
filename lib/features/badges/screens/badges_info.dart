@@ -28,7 +28,12 @@ class BadgesInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CategoryFilterRow(),
+              CategoryFilterRow(
+                selectedCategory: 'All', // Default for now
+                onCategoryChanged: (cat) {
+                  // Badges category filtering can be added later
+                },
+              ),
 
               const SizedBox(height: 20),
 

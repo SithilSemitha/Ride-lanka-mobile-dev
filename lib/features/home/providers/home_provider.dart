@@ -30,7 +30,10 @@ class HomeProvider extends ChangeNotifier {
   bool _isCategoryLoading = false;
   bool get isCategoryLoading => _isCategoryLoading;
 
-  // ── Search ────────────────────────────────────────────────────────────────
+  // ── Explore / Search ──────────────────────────────────────────────────────
+  List<ExplorePlaceModel> _allExplorePlaces = [];
+  List<ExplorePlaceModel> get allExplorePlaces => _allExplorePlaces;
+
   List<ExplorePlaceModel> _searchResults = [];
   List<ExplorePlaceModel> get searchResults => _searchResults;
 
@@ -49,6 +52,9 @@ class HomeProvider extends ChangeNotifier {
 
   String _userName = 'Traveller';
   String get userName => _userName;
+
+  String _userEmail = '';
+  String get userEmail => _userEmail;
 
   String _currentLocationName = 'Location Unknown';
   String get currentLocationName => _currentLocationName;
@@ -71,8 +77,12 @@ class HomeProvider extends ChangeNotifier {
           if (userSnap.exists) {
             final userData = userSnap.data();
             final name = userData?['name'] as String?;
+            final email = userData?['email'] as String?;
             if (name != null && name.trim().isNotEmpty) {
               _userName = name.trim().split(' ').first;
+            }
+            if (email != null && email.trim().isNotEmpty) {
+              _userEmail = email.trim();
             }
           }
         }
@@ -111,7 +121,7 @@ class HomeProvider extends ChangeNotifier {
         }
       } catch (e) {
         _logger.e('Location error: $e');
-        _currentLocationName = 'Location Unknown';
+        _currentLocationName = 'Unknown Location';
       }
 
       // Fetch places
@@ -171,6 +181,14 @@ class HomeProvider extends ChangeNotifier {
             ),
           )
           .toList();
+
+      // Fetch explore places for local querying (Search + Wishlist)
+      try {
+        _allExplorePlaces = await _homeService.fetchExplorePlaces();
+      } catch (e) {
+        _logger.e('fetchAllExplorePlaces error: $e');
+      }
+
     } catch (e) {
       _logger.e('fetchHomeData error: $e');
       _errorMessage = e.toString();
@@ -267,8 +285,18 @@ class HomeProvider extends ChangeNotifier {
       return Future.error('Location permissions are permanently denied.');
     }
 
-    return await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.low,
-    );
+    try {
+      return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low,
+        timeLimit: const Duration(
+          seconds: 5,
+        ), // Added timeout to prevent hanging
+      );
+    } catch (e) {
+      // Fallback to last known position if current position times out or fails
+      final position = await Geolocator.getLastKnownPosition();
+      if (position != null) return position;
+      return Future.error('Failed to get location: $e');
+    }
   }
 }

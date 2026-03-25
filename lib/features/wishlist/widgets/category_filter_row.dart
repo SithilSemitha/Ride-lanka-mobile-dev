@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
 
-class CategoryFilterRow extends StatefulWidget {
-  const CategoryFilterRow({super.key});
+class CategoryFilterRow extends StatelessWidget {
+  final String selectedCategory;
+  final ValueChanged<String> onCategoryChanged;
 
-  @override
-  State<CategoryFilterRow> createState() => _CategoryFilterRowState();
-}
+  const CategoryFilterRow({
+    super.key,
+    required this.selectedCategory,
+    required this.onCategoryChanged,
+  });
 
-class _CategoryFilterRowState extends State<CategoryFilterRow> {
-  final List<String> _categories = [
+  static const List<String> categories = [
     'All',
     'Mountain',
     'Beach',
@@ -17,25 +19,24 @@ class _CategoryFilterRowState extends State<CategoryFilterRow> {
     'Wildlife',
     'Waterfall',
   ];
-  String _selected = 'All';
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         // _FilterButton(),
-        const SizedBox(width: 8),
+        // const SizedBox(width: 8),
 
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: _categories.map((category) {
-                final isSelected = _selected == category;
+              children: categories.map((category) {
+                final isSelected = selectedCategory == category;
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: GestureDetector(
-                    onTap: () => setState(() => _selected = category),
+                    onTap: () => onCategoryChanged(category),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       padding: const EdgeInsets.symmetric(
@@ -76,28 +77,3 @@ class _CategoryFilterRowState extends State<CategoryFilterRow> {
     );
   }
 }
-
-// class _FilterButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         // open filter bottom sheet later
-//       },
-//       child: Container(
-//         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-//         decoration: BoxDecoration(
-//           border: Border.all(color: AppColors.grey.withOpacity(0.4)),
-//           borderRadius: BorderRadius.circular(30),
-//         ),
-//         child: Row(
-//           children: [
-//             Icon(Icons.tune, size: 18, color: AppColors.grey),
-//             const SizedBox(width: 4),
-//             Icon(Icons.keyboard_arrow_down, size: 18, color: AppColors.grey),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

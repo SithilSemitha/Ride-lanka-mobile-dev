@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_assets.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:ride_lanka/features/home/models/category_model.dart';
 import 'package:ride_lanka/features/home/widgets/category_item.dart';
 import 'package:ride_lanka/features/home/widgets/nearby_place_card.dart';
 import 'package:ride_lanka/features/home/widgets/popular_place_card.dart';
+import 'package:ride_lanka/routes/app_routes.dart';
 
 const String helvetica1 = 'Helvetica1';
 
@@ -28,6 +30,7 @@ class _MainHomeState extends State<MainHome> {
   ];
 
   final TextEditingController _searchController = TextEditingController();
+  Timer? _debounce;
 
   @override
   void initState() {
@@ -39,6 +42,7 @@ class _MainHomeState extends State<MainHome> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
   }
@@ -124,9 +128,20 @@ class _MainHomeState extends State<MainHome> {
                       children: [
                         Expanded(
                           child: TextField(
+                            onTapOutside: (event) {
+                              FocusScope.of(context).unfocus();
+                            },
                             controller: _searchController,
                             onChanged: (value) {
-                              homeProvider.searchPlaces(value);
+                              if (_debounce?.isActive ?? false) {
+                                _debounce!.cancel();
+                              }
+                              _debounce = Timer(
+                                const Duration(milliseconds: 500),
+                                () {
+                                  homeProvider.searchPlaces(value);
+                                },
+                              );
                             },
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(
@@ -232,7 +247,11 @@ class _MainHomeState extends State<MainHome> {
                 // ── Main scrollable area ───────────────────────────────
                 Expanded(
                   child: homeProvider.isLoading
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.lowPrimaryColor,
+                          ),
+                        )
                       : SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
                           child: Column(
@@ -449,10 +468,18 @@ class _ExplorePlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 0,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.placeDetails,
+          arguments: {'place': place},
+        );
+      },
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 0,
       child: Row(
         children: [
           ClipRRect(
@@ -517,6 +544,7 @@ class _ExplorePlaceCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

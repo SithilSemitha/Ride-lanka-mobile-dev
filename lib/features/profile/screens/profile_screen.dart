@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
 import 'package:ride_lanka/features/auth/providers/auth_provider.dart';
+import 'package:ride_lanka/features/home/providers/home_provider.dart';
 import 'package:ride_lanka/features/profile/widgets/profile_info.dart';
 import 'package:ride_lanka/features/profile/widgets/profile_summary_row.dart';
 import 'package:ride_lanka/features/profile/widgets/badges_card.dart';
@@ -18,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -38,8 +40,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ProfileInfo(
                 imageUrl:
                     'https://scontent-sin11-2.xx.fbcdn.net/v/t39.30808-1/627147155_882953857856540_4496525664149994015_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=101&ccb=1-7&_nc_sid=e99d92&_nc_ohc=EoEvd2yp8ZwQ7kNvwGAdM65&_nc_oc=AdpT9lyZY5CggScPmy0rG9ng-2pwMRJy_8a353t013HX2yv3gRB5eYNd-gl1pA4n_JY&_nc_zt=24&_nc_ht=scontent-sin11-2.xx&_nc_gid=OAPOyEL0W7HGPoMFwtUqyw&_nc_ss=7a32e&oh=00_Afy_8WYXJwz-XRigEm_4e1mLVB5UIn1lKWgoU2Zsoc0KlQ&oe=69C5A1F5',
-                userName: 'Thisara Kavinda',
-                userEmail: 'thisarakavinda25@gmail.com',
+                userName: homeProvider.userName,
+                userEmail: homeProvider.userEmail,
                 onLogout: () {
                   Provider.of<AuthController>(
                     context,

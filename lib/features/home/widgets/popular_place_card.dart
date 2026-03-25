@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ride_lanka/core/constants/app_colors.dart';
-import 'package:ride_lanka/core/utils/wishlist_store.dart';
+import 'package:provider/provider.dart';
+import 'package:ride_lanka/features/wishlist/providers/wishlist_provider.dart';
 import 'package:ride_lanka/features/home/models/popular_place_model.dart';
+import 'package:ride_lanka/routes/app_routes.dart';
 
 class PopularPlaceCard extends StatefulWidget {
   final PopularPlaceModel place;
@@ -20,10 +22,18 @@ class PopularPlaceCard extends StatefulWidget {
 class _PopularPlaceCardState extends State<PopularPlaceCard> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 0,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.placeDetails,
+          arguments: {'place': widget.place},
+        );
+      },
+      child: Card(
+        color: AppColors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 0,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -70,18 +80,17 @@ class _PopularPlaceCardState extends State<PopularPlaceCard> {
                           SizedBox(width: 8),
                           GestureDetector(
                             onTap: () {
-                              setState(() {
-                                FavoritesStore.toggle(widget.place.id);
-                              });
+                              context.read<WishlistProvider>().toggleFavorite(widget.place.id);
                             },
-                            child: Icon(
-                              FavoritesStore.isFavorite(widget.place.id)
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              color: FavoritesStore.isFavorite(widget.place.id)
-                                  ? Colors.red
-                                  : AppColors.grey,
-                              size: 20,
+                            child: Consumer<WishlistProvider>(
+                              builder: (context, provider, child) {
+                                final isFav = provider.isFavorite(widget.place.id);
+                                return Icon(
+                                  isFav ? Icons.favorite : Icons.favorite_border,
+                                  color: isFav ? Colors.red : AppColors.grey,
+                                  size: 20,
+                                );
+                              },
                             ),
                           ),
                         ],
@@ -129,6 +138,7 @@ class _PopularPlaceCardState extends State<PopularPlaceCard> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
